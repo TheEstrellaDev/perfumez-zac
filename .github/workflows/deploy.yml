@@ -42,7 +42,8 @@ jobs:
             SITE_URL="https://$(tr -d '\r\n' < CNAME)/"
           else
             REPOSITORY_NAME="${GITHUB_REPOSITORY#*/}"
-            SITE_URL="https://${GITHUB_REPOSITORY_OWNER}.github.io/${REPOSITORY_NAME}/"
+            REPOSITORY_OWNER="$(printf '%s' "$GITHUB_REPOSITORY_OWNER" | tr '[:upper:]' '[:lower:]')"
+            SITE_URL="https://${REPOSITORY_OWNER}.github.io/${REPOSITORY_NAME}/"
           fi
           SITE_URL="$SITE_URL" npm run build
 
